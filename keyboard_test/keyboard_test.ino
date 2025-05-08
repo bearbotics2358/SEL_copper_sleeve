@@ -3,6 +3,9 @@
 #define TOP_LINEAR_ACTUATOR_A A4
 #define TOP_LINEAR_ACTUATOR_B A3
 
+#define BOTTOM_LINEAR_ACTUATOR_A A2
+#define BOTTOM_LINEAR_ACTUATOR_B A1
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
@@ -16,7 +19,13 @@ void setup() {
   pinMode(TOP_LINEAR_ACTUATOR_B, OUTPUT);
 
   digitalWrite(TOP_LINEAR_ACTUATOR_A, 0);  
-  digitalWrite(TOP_LINEAR_ACTUATOR_B, 0);  
+  digitalWrite(TOP_LINEAR_ACTUATOR_B, 0);
+
+  pinMode(BOTTOM_LINEAR_ACTUATOR_A, OUTPUT);
+  pinMode(BOTTOM_LINEAR_ACTUATOR_B, OUTPUT);
+
+  digitalWrite(BOTTOM_LINEAR_ACTUATOR_A, 0);  
+  digitalWrite(BOTTOM_LINEAR_ACTUATOR_B, 0);    
 }
 
 void loop() {
@@ -41,6 +50,18 @@ void loop() {
         digitalWrite(TOP_LINEAR_ACTUATOR_B, 1);
         break;
 
+      case '5':
+        Serial.println("Bottom Linear Actuator extend");
+        digitalWrite(BOTTOM_LINEAR_ACTUATOR_A, 1);
+        digitalWrite(BOTTOM_LINEAR_ACTUATOR_B, 0);
+        break;
+
+      case '6':
+        Serial.println("Bottom Linear Actuator retract");
+        digitalWrite(BOTTOM_LINEAR_ACTUATOR_A, 0);
+        digitalWrite(BOTTOM_LINEAR_ACTUATOR_B, 1);
+        break;
+        
       default:
         Serial.print("unknown command received: *");
         Serial.print(c);
